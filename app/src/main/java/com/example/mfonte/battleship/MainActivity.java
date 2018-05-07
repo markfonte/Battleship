@@ -21,11 +21,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         startApp();
     }
+
     protected void startApp() {
-        Intent i = new Intent(this, Lobby.class);
+        Intent i = new Intent(this, Login.class);
         startActivity(i);
     }
-    
+
     protected void sendGetRequest()  {
         final TextView mTextView = findViewById(R.id.textBox1);
         // Instantiate the RequestQueue.
