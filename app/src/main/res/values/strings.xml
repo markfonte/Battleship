@@ -11,4 +11,7 @@
     <string name="error_invalid_password">This password is invalid</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+
+    <string name="main_activity_text">Lobby</string>
+    <string name="lobby_button_text">Go To Lobby</string>
 </resources>

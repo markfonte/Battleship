@@ -26,7 +26,8 @@
         <activity android:name=".Lobby" />
         <activity
             android:name=".Login"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login" />
+        <activity android:name=".GamePage"></activity>
     </application>
 
 </manifest>

@@ -31,6 +31,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,7 +121,12 @@ public class Login extends AppCompatActivity {
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (TextUtils.isEmpty(password)){
+            Log.d("emptyPassword", username );
+            mPasswordView.setError(getString(R.string.error_field_required));
+            focusView = mPasswordView;
+            cancel = true;
+        } else if(!isPasswordValid(password)) {
             Log.d("invalidPassword", username );
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
@@ -135,8 +147,7 @@ public class Login extends AppCompatActivity {
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
+            // There was an error; don't attempt login and focus the first form field with an error.
             focusView.requestFocus();
         } else {
             // Show a progress spinner, and kick off a background task to
@@ -149,7 +160,7 @@ public class Login extends AppCompatActivity {
 
     private boolean isUsernameValid(String username) {
         //TODO: Replace this with your own logic
-        return true;
+        return username.length() > 0;
     }
 
     private boolean isPasswordValid(String password) {
@@ -186,6 +197,30 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    protected void sendGetRequest()  {
+        //final TextView mTextView = findViewById(R.id.textBox1);
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "http://10.0.2.2/";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("loginInfo", response);
+                        //mTextView.setText(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("errorInfo", error.getMessage());
+               // mTextView.setText("Error using GET request");
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+    }
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
@@ -202,7 +237,7 @@ public class Login extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
+           sendGetRequest();
 
             try {
                 // Simulate network access.
