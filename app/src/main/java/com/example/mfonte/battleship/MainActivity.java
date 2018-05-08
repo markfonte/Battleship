@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void startApp() {
-        Intent i = new Intent(this, Login.class);
+        Intent i = new Intent(this, Lobby.class);
         startActivity(i);
     }
 
