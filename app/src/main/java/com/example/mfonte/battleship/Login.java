@@ -4,29 +4,17 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -35,19 +23,27 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import static android.Manifest.permission.READ_CONTACTS;
-
+import java.util.HashMap;
+import java.util.Map;
+import org.json.*;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 /**
  * A login screen that offers login via username/password.
  */
 public class Login extends AppCompatActivity {
 
+    @Override
+    public void onBackPressed() {
+    }
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -197,29 +193,58 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    protected void sendGetRequest()  {
-        //final TextView mTextView = findViewById(R.id.textBox1);
-        // Instantiate the RequestQueue.
+    protected void sendLoginRequest(final String user, final String pass)  {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://10.0.2.2/";
+        String url = "http://10.0.2.2/api/login.php";
+        //LoginResponseData l = new LoginResponseData(0, false, "");
+        JSONObject dummyJson = new JSONObject();
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+            new Response.Listener<String>()
+            {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject json = new JSONObject(response);
+                        if (json.get("success").toString().equals("false")) {
+                            Log.d("Login.java", "Unsuccessful, transferring to register page");
+                            Log.d("Login.java", response);
+                            Intent i = new Intent(Login.this, Register.class);
+                            startActivity(i);
+                        } else {
+                            Log.d("Login.java", "Username and password are valid, transferring to lobby");
+                            Intent openMainActivity= new Intent(Login.this, MainActivity.class);
+                            openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                            openMainActivity.putExtra("userId", Integer.parseInt(json.get("id").toString()));
+                            openMainActivity.putExtra("userName", json.get("name").toString());
+                            openMainActivity.putExtra("sessionId", json.get("session_id").toString());
+                            //startActivityIfNeeded(openMainActivity, 0);
+                        }
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.d("loginInfo", response);
-                        //mTextView.setText(response);
+                    } catch (JSONException e) {
+                        Log.d("jsonexception", "error");
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("errorInfo", error.getMessage());
-               // mTextView.setText("Error using GET request");
+                    Log.d("Response", response);
+                }
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    error.getNetworkTimeMs();
+                    Log.d("Error.Response", "Volleyerror");
+                }
             }
-        });
-
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<>();
+                params.put("mobile", "true");
+                params.put("username", user);
+                params.put("password", pass);
+                return params;
+            }
+        };
+        queue.add(postRequest);
     }
     /**
      * Represents an asynchronous login/registration task used to authenticate
@@ -237,24 +262,22 @@ public class Login extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-           sendGetRequest();
+           sendLoginRequest(mUsername, mPassword);
 
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mUsername)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-            Intent i = new Intent(Login.this, Register.class);
-            startActivity(i);
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                return false;
+//            }
+//
+//
+//            for (String credential : DUMMY_CREDENTIALS) {
+//                String[] pieces = credential.split(":");
+//                if (pieces[0].equals(mUsername)) {
+//                    // Account exists, return true if the password matches.
+//                    return pieces[1].equals(mPassword);
+//                }
+//            }
             return true;
         }
 

@@ -25,12 +25,16 @@ public class MainActivity extends AppCompatActivity {
         final Button button = findViewById(R.id.lobbyButton);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, Login.class);
+                Intent i = new Intent(MainActivity.this, MainActivity.class);
                 startActivity(i);
             }
         });
-        sendGetRequest();
+        //sendGetRequest();
         startApp();
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 
     protected void startApp() {
