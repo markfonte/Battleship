@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Register">
+
+    <TextView
+        android:id="@+id/RegisterTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create An Account:" />
+
+    <TextView
+        android:id="@+id/UsernameText"
+        android:layout_below="@id/RegisterTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username:"/>
+    <EditText
+        android:id="@+id/UsernameEntry"
+        android:layout_below="@id/UsernameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/PasswordText"
+        android:layout_below="@id/UsernameEntry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password:"/>
+    <EditText
+        android:id="@+id/PasswordEntry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/PasswordText" />
+    <Button
+        android:id="@+id/RegisterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/PasswordEntry"/>
+</RelativeLayout>
