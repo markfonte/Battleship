@@ -102,6 +102,17 @@ public class Login extends AppCompatActivity {
         startActivity(i);
     }
 
+    @Override
+    public void finish() {
+        // Prepare data intent
+        Intent data = new Intent();
+        data.putExtra("mUserId", mUserId);
+        data.putExtra("mUserName", mUserName);
+        // Activity finished ok, return the data
+        setResult(RESULT_OK, data);
+        super.finish();
+    }
+
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid username, missing fields, etc.), the
@@ -225,6 +236,7 @@ public class Login extends AppCompatActivity {
                             mUserName = json.get("name").toString();
                             mSessionId = json.get("session_id").toString();
                             mSuccess = true;
+                            finish();
                         }
 
                     } catch (JSONException e) {
@@ -254,16 +266,6 @@ public class Login extends AppCompatActivity {
         queue.add(postRequest);
     }
 
-    @Override
-    public void finish() {
-        // Prepare data intent
-        Intent data = new Intent();
-        data.putExtra("mUserId", mUserId);
-        data.putExtra("mUserName", mUserName);
-        // Activity finished ok, return the data
-        setResult(RESULT_OK, data);
-        super.finish();
-    }
 
     /**
      * Represents an asynchronous login/registration task used to authenticate
@@ -291,7 +293,7 @@ public class Login extends AppCompatActivity {
             showProgress(false);
 
             if (success) {
-                finish();
+               // finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

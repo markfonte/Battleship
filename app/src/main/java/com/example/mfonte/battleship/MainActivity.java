@@ -23,13 +23,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        LinearLayout rl = findViewById(R.id.lobbyLinearLayout);
-        for(int x=0; x<20; ++x) {
-            TextView dynamic = new TextView(this);
-            dynamic.setText(getString(R.string.dynamic_text));
-            dynamic.setTextSize(18);
-            rl.addView(dynamic);
-        }
         startApp();
     }
 
@@ -46,11 +39,22 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        String userName = "";
+        String sessionId = "";
+        int userId = 0;
         if (resultCode == RESULT_OK && requestCode == 0) {
-            if (data.hasExtra("returnKey1")) {
-                Toast.makeText(this, data.getExtras().getString("returnKey1"),
-                        Toast.LENGTH_SHORT).show();
+            if (data.hasExtra("mUserName")) {
+                userName =  data.getExtras().getString("mUserName");
+                userId = data.getExtras().getInt("mUserId");
+                sessionId = data.getExtras().getString("mSessionId");
             }
+        }
+        LinearLayout rl = findViewById(R.id.lobbyLinearLayout);
+        for(int x=0; x<20; ++x) {
+            TextView dynamic = new TextView(this);
+            dynamic.setText(userName);
+            dynamic.setTextSize(18);
+            rl.addView(dynamic);
         }
     }
     @Override
@@ -59,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
     protected void startApp() {
         Intent i = new Intent(this, Login.class);
-        i.putExtra("abc", 123);
         startActivityForResult(i, 0);
     }
 
