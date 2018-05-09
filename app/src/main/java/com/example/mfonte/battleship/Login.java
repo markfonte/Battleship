@@ -23,7 +23,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -32,10 +31,6 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.json.*;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 /**
  * A login screen that offers login via username/password.
  */
@@ -45,13 +40,6 @@ public class Login extends AppCompatActivity {
     public void onBackPressed() {
     }
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -66,6 +54,12 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle bundle = getIntent().getExtras();
+        try {
+            boolean value = bundle.getBoolean("success");
+        } catch (java.lang.NullPointerException e) {
+            Log.d("MainActivity.java", e.toString());
+        }
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mUsernameView = findViewById(R.id.username);
@@ -82,7 +76,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        Button mUsernameSignInButton = (Button) findViewById(R.id.username_sign_in_button);
+        Button mUsernameSignInButton = findViewById(R.id.username_sign_in_button);
         mUsernameSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,10 +84,23 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        Button mCreateAnAccountButton = findViewById(R.id.create_account_button);
+        mCreateAnAccountButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                moveToCreateAccount();
+            }
+        });
+
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
 
+    private void moveToCreateAccount() {
+        Log.d("Login.java", "Button clicked, moving to Register Activity");
+        Intent i = new Intent(Login.this, Register.class);
+        startActivity(i);
+    }
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -155,13 +162,11 @@ public class Login extends AppCompatActivity {
     }
 
     private boolean isUsernameValid(String username) {
-        //TODO: Replace this with your own logic
-        return username.length() > 0;
+        return username.length() >= 1 && username.length() <= 20;
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 0;
+        return password.length() >= 8 && password.length() <= 32;
     }
 
     /**
@@ -169,11 +174,7 @@ public class Login extends AppCompatActivity {
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
         int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
         mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         mLoginFormView.animate().setDuration(shortAnimTime).alpha(
                 show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
@@ -182,7 +183,6 @@ public class Login extends AppCompatActivity {
                 mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
             }
         });
-
         mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
         mProgressView.animate().setDuration(shortAnimTime).alpha(
                 show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
@@ -193,11 +193,14 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    private int mUserId = 0;
+    private String mUserName = "";
+    private String mSessionId = "";
+    private boolean mSuccess = false;
+
     protected void sendLoginRequest(final String user, final String pass)  {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://10.0.2.2/api/login.php";
-        //LoginResponseData l = new LoginResponseData(0, false, "");
-        JSONObject dummyJson = new JSONObject();
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
             new Response.Listener<String>()
             {
@@ -212,16 +215,20 @@ public class Login extends AppCompatActivity {
                             startActivity(i);
                         } else {
                             Log.d("Login.java", "Username and password are valid, transferring to lobby");
-                            Intent openMainActivity= new Intent(Login.this, MainActivity.class);
-                            openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                            openMainActivity.putExtra("userId", Integer.parseInt(json.get("id").toString()));
-                            openMainActivity.putExtra("userName", json.get("name").toString());
-                            openMainActivity.putExtra("sessionId", json.get("session_id").toString());
-                            //startActivityIfNeeded(openMainActivity, 0);
+                            //Intent openMainActivity= new Intent(Login.this, Register.class);
+//                            openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//                            openMainActivity.putExtra("userId", Integer.parseInt(json.get("id").toString()));
+//                            openMainActivity.putExtra("userName", json.get("name").toString());
+//                            openMainActivity.putExtra("sessionId", json.get("session_id").toString());
+//                            openMainActivity.putExtra("success", true);
+                            mUserId = Integer.parseInt(json.get("id").toString());
+                            mUserName = json.get("name").toString();
+                            mSessionId = json.get("session_id").toString();
+                            mSuccess = true;
                         }
 
                     } catch (JSONException e) {
-                        Log.d("jsonexception", "error");
+                        Log.d("Login.java", "JSONException");
                     }
                     Log.d("Response", response);
                 }
@@ -246,6 +253,18 @@ public class Login extends AppCompatActivity {
         };
         queue.add(postRequest);
     }
+
+    @Override
+    public void finish() {
+        // Prepare data intent
+        Intent data = new Intent();
+        data.putExtra("mUserId", mUserId);
+        data.putExtra("mUserName", mUserName);
+        // Activity finished ok, return the data
+        setResult(RESULT_OK, data);
+        super.finish();
+    }
+
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
@@ -262,22 +281,7 @@ public class Login extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-           sendLoginRequest(mUsername, mPassword);
-
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                return false;
-//            }
-//
-//
-//            for (String credential : DUMMY_CREDENTIALS) {
-//                String[] pieces = credential.split(":");
-//                if (pieces[0].equals(mUsername)) {
-//                    // Account exists, return true if the password matches.
-//                    return pieces[1].equals(mPassword);
-//                }
-//            }
+            sendLoginRequest(mUsername, mPassword);
             return true;
         }
 
@@ -292,7 +296,6 @@ public class Login extends AppCompatActivity {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }
-
         }
 
         @Override
@@ -302,4 +305,3 @@ public class Login extends AppCompatActivity {
         }
     }
 }
-

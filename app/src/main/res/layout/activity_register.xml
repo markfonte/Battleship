@@ -8,9 +8,12 @@
     <TextView
         android:id="@+id/RegisterTitle"
         android:textSize="24sp"
-        android:layout_width="wrap_content"
+        android:padding="8dp"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create An Account:" />
+        android:text="Create An Account"
+        android:textAlignment="center" />
 
     <EditText
         android:id="@+id/UsernameEntry"
@@ -27,10 +30,22 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/UsernameEntry" />
     <Button
-        android:hint="Enter"
-        android:layout_centerInParent="true"
         android:id="@+id/RegisterButton"
-        android:layout_width="wrap_content"
+        android:text="Create Account"
+        style="?android:textAppearanceSmall"
+        android:textStyle="bold"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/PasswordEntry"/>
+
+    <Button
+        android:id="@+id/back_to_login_button"
+        android:text="Back To Login"
+        style="?android:textAppearanceSmall"
+        android:textStyle="bold"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/RegisterButton"/>
 </RelativeLayout>

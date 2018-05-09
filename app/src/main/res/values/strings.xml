@@ -14,4 +14,6 @@
 
     <string name="main_activity_text">Lobby</string>
     <string name="lobby_button_text">Log Out</string>
+
+    <string name="dynamic_text">Dynamic</string>
 </resources>
