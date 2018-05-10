@@ -9,6 +9,18 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -28,17 +40,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-//        Bundle bundle = getIntent().getExtras();
-//        try {
-//            boolean value = bundle.getBoolean("success");
-//        } catch (java.lang.NullPointerException e) {
-//            Log.d("MainActivity.java", e.toString());
-//        }
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         String userName = "";
         String sessionId = "";
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         }
         TextView username_display_text = findViewById(R.id.username_display_text);
         username_display_text.append(userName);
-
+        sendGetRequestForLobbyData();
     }
 
     protected void insertLobbyRow(String username1, String username2, String state, String currentUserName) {
@@ -115,6 +116,30 @@ public class MainActivity extends AppCompatActivity {
         lobbyListContainer.addView(lobbyRow);
     }
 
+    private JSONObject mJSONContainer = null;
+
+    protected void sendGetRequestForLobbyData()  {
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "http://10.0.2.2/api/game/lobby.php";
+
+        JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d("errorInfo", response.toString());
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("errorInfo", error.getMessage());
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(getRequest);
+    }
+
     @Override
     public void onBackPressed() {
     }
@@ -124,28 +149,5 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(i, 0);
     }
 
-//    protected void sendGetRequest()  {
-//        final TextView mTextView = findViewById(R.id.textBox1);
-//        // Instantiate the RequestQueue.
-//        RequestQueue queue = Volley.newRequestQueue(this);
-//        String url = "http://10.0.2.2/";
-//
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        Log.d("errorInfo", response);
-//                        mTextView.setText(response);
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Log.d("errorInfo", error.getMessage());
-//                mTextView.setText("Error using GET request");
-//            }
-//        });
-//
-//        // Add the request to the RequestQueue.
-//        queue.add(stringRequest);
-//    }
+
 }

@@ -34,8 +34,10 @@ public class Register extends AppCompatActivity {
                 String username = userText.getText().toString();
                 EditText passwordText = findViewById(R.id.PasswordEntry);
                 String password = passwordText.getText().toString();
+                EditText confirmPasswordText = findViewById(R.id.ConfirmPasswordEntry);
+                String confirmPassword = confirmPasswordText.getText().toString();
                 if(isUsernameValid(username) && isPasswordValid(password)) {
-                    sendCreateAccountRequest(username, password);
+                    sendCreateAccountRequest(username, password, confirmPassword);
                 }
             }
         });
@@ -79,7 +81,7 @@ public class Register extends AppCompatActivity {
         super.finish();
     }
 
-    protected void sendCreateAccountRequest(final String user, final String pass) {
+    protected void sendCreateAccountRequest(final String user, final String pass, final String confirm_pass) {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://10.0.2.2/api/create_account.php";
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
@@ -124,6 +126,7 @@ public class Register extends AppCompatActivity {
                 params.put("mobile", "true");
                 params.put("username", user);
                 params.put("password", pass);
+                params.put("confirm_password", confirm_pass);
                 return params;
             }
         };
