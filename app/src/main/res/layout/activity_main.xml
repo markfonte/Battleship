@@ -15,7 +15,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_margin="8dp" >
 
             <TextView
                 android:id="@+id/number1"
@@ -29,14 +30,13 @@
             <Button
                 android:id="@+id/lobbyButton"
                 style="?android:textAppearanceSmall"
-                android:layout_toRightOf="@id/number1"
+                android:layout_toEndOf="@id/number1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:textStyle="bold"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="128dp"
-                android:layout_alignParentRight="true"
+                android:layout_marginStart="128dp"
+                android:layout_alignParentEnd="true"
                 android:text="@string/lobby_button_text"/>
 
         </RelativeLayout>
@@ -44,6 +44,7 @@
         <TextView
             android:id="@+id/username_display_text"
             android:textSize="18sp"
+            android:layout_margin="8dp"
             android:text="Username: "
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -51,14 +52,12 @@
         <Button
             android:id="@+id/new_game_button"
             android:text="New Game"
+            android:layout_margin="8dp"
             style="?android:textAppearanceSmall"
             android:textStyle="bold"
-            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
-
-
 
 </ScrollView>

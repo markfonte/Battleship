@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         final Button button = findViewById(R.id.lobbyButton);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
         startApp();
     }
 
@@ -50,14 +52,26 @@ public class MainActivity extends AppCompatActivity {
         }
         TextView username_display_text = findViewById(R.id.username_display_text);
         username_display_text.append(userName);
-        LinearLayout rl = findViewById(R.id.lobbyLinearLayout);
-        for(int x=0; x<20; ++x) {
-            TextView dynamic = new TextView(this);
-            dynamic.setText(userName);
-            dynamic.setTextSize(18);
-            rl.addView(dynamic);
+        LinearLayout lobbyListContainer = findViewById(R.id.lobbyLinearLayout);
+        for(int x=0; x<3; ++x) {
+            TextView user1 = new TextView(this);
+            TextView user2 = new TextView(this);
+            Button enterGame = new Button(this);
+            user1.setText(userName); // TODO: change to user1
+            user1.setPadding(8, 8 , 8, 8);
+            user1.setTextSize(18);
+            user2.setText(sessionId); //TODO: change to user2
+            user2.setPadding(8, 8 , 8, 8);
+            user2.setTextSize(18);
+            enterGame.setText("Enter Game");
+            LinearLayout lobbyRow = new LinearLayout(this);
+            lobbyRow.addView(user1);
+            lobbyRow.addView(user2);
+            lobbyRow.addView(enterGame);
+            lobbyListContainer.addView(lobbyRow);
         }
     }
+
     @Override
     public void onBackPressed() {
     }

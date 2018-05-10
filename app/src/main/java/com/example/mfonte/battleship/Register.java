@@ -13,12 +13,20 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        final Button button = findViewById(R.id.RegisterButton);
-        button.setOnClickListener(new View.OnClickListener() {
+        final Button createAccountButton = findViewById(R.id.RegisterButton);
+        createAccountButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //EditText userText = findViewById(R.id.UsernameEntry);
                 //String username = userText.getText().toString();
                 Intent openMainActivity= new Intent(Register.this, MainActivity.class);
+                openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(openMainActivity, 0);
+            }
+        });
+        final Button backToLoginButton = findViewById(R.id.back_to_login_button);
+        backToLoginButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent openMainActivity= new Intent(Register.this, Login.class);
                 openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivityIfNeeded(openMainActivity, 0);
             }

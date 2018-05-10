@@ -108,6 +108,7 @@ public class Login extends AppCompatActivity {
         Intent data = new Intent();
         data.putExtra("mUserId", mUserId);
         data.putExtra("mUserName", mUserName);
+        data.putExtra("mSessionId", mSessionId);
         // Activity finished ok, return the data
         setResult(RESULT_OK, data);
         super.finish();
@@ -226,12 +227,6 @@ public class Login extends AppCompatActivity {
                             startActivity(i);
                         } else {
                             Log.d("Login.java", "Username and password are valid, transferring to lobby");
-                            //Intent openMainActivity= new Intent(Login.this, Register.class);
-//                            openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-//                            openMainActivity.putExtra("userId", Integer.parseInt(json.get("id").toString()));
-//                            openMainActivity.putExtra("userName", json.get("name").toString());
-//                            openMainActivity.putExtra("sessionId", json.get("session_id").toString());
-//                            openMainActivity.putExtra("success", true);
                             mUserId = Integer.parseInt(json.get("id").toString());
                             mUserName = json.get("name").toString();
                             mSessionId = json.get("session_id").toString();
@@ -249,7 +244,7 @@ public class Login extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     error.getNetworkTimeMs();
-                    Log.d("Error.Response", "Volleyerror");
+                    Log.d("Login.java", "Volley Error");
                 }
             }
         ) {
@@ -292,9 +287,7 @@ public class Login extends AppCompatActivity {
             mAuthTask = null;
             showProgress(false);
 
-            if (success) {
-               // finish();
-            } else {
+            if (!success) {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }
