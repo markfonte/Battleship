@@ -50,24 +50,69 @@ public class MainActivity extends AppCompatActivity {
         }
         TextView username_display_text = findViewById(R.id.username_display_text);
         username_display_text.append(userName);
+
+    }
+
+    protected void insertLobbyRow(String username1, String username2, String state, String currentUserName) {
         LinearLayout lobbyListContainer = findViewById(R.id.lobbyLinearLayout);
-        for(int x=0; x<3; ++x) {
-            TextView user1 = new TextView(this);
-            TextView user2 = new TextView(this);
-            Button enterGame = new Button(this);
-            user1.setText(userName); // TODO: change to user1
-            user1.setPadding(8, 8 , 8, 8);
-            user1.setTextSize(18);
-            user2.setText(sessionId); //TODO: change to user2
-            user2.setPadding(8, 8 , 8, 8);
-            user2.setTextSize(18);
-            enterGame.setText("Enter Game");
-            LinearLayout lobbyRow = new LinearLayout(this);
-            lobbyRow.addView(user1);
-            lobbyRow.addView(user2);
-            lobbyRow.addView(enterGame);
-            lobbyListContainer.addView(lobbyRow);
+        TextView user1 = new TextView(this);
+        TextView user2 = new TextView(this);
+        Button enterGame = new Button(this);
+        boolean isUser1 = currentUserName.equals(username1);
+        boolean isUser2 = currentUserName.equals(username2);
+        user1.setText(username1);
+        user1.setPadding(8, 8 , 8, 8);
+        user1.setTextSize(18);
+        user2.setText(username2);
+        user2.setPadding(8, 8 , 8, 8);
+        user2.setTextSize(18);
+        switch(state) {
+            case "join_game": {
+                if(isUser1) {
+                    enterGame.setText(getString(R.string.join_game_as_player));
+                }
+                else {
+                    enterGame.setText(getString(R.string.join_open_game));
+                }
+            }
+            break;
+            case "setup": {
+                if(isUser1 || isUser2) {
+                    enterGame.setText(getString(R.string.join_game_as_player));
+                }
+                else {
+                    enterGame.setText(getString(R.string.closed_game));
+                }
+            }
+            break;
+            case "gameplay": {
+                if(isUser1 || isUser2) {
+                    enterGame.setText(getString(R.string.join_game_as_player));
+                }
+                else {
+                    enterGame.setText(getString(R.string.closed_game));
+                }
+            }
+            break;
+            case "game_over": {
+                if(isUser1 || isUser2) {
+                    enterGame.setText(getString(R.string.join_game_as_player));
+                }
+                else {
+                    enterGame.setText(getString(R.string.closed_game));
+                }
+            }
+            break;
+            default: {
+                Log.d("MainActivity.java", "default in switch case for game modes");
+            }
         }
+
+        LinearLayout lobbyRow = new LinearLayout(this);
+        lobbyRow.addView(user1);
+        lobbyRow.addView(user2);
+        lobbyRow.addView(enterGame);
+        lobbyListContainer.addView(lobbyRow);
     }
 
     @Override

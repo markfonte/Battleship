@@ -37,9 +37,6 @@ public class Register extends AppCompatActivity {
                 if(isUsernameValid(username) && isPasswordValid(password)) {
                     sendCreateAccountRequest(username, password);
                 }
-//                Intent openMainActivity= new Intent(Register.this, MainActivity.class);
-//                openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-//                startActivityIfNeeded(openMainActivity, 0);
             }
         });
         final Button backToLoginButton = findViewById(R.id.back_to_login_button);
@@ -53,7 +50,12 @@ public class Register extends AppCompatActivity {
     }
 
     private boolean isUsernameValid(String username) {
-        return username.length() >= 1 && username.length() <= 20;
+        EditText mUsername = findViewById(R.id.UsernameEntry);
+        if(username.length() < 1 || username.length() > 20) {
+            mUsername.setError(getString(R.string.error_invalid_username));
+            return false;
+        }
+        return true;
     }
 
     private boolean isPasswordValid(String password) {

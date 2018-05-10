@@ -15,20 +15,39 @@
         android:text="Create An Account"
         android:textAlignment="center" />
 
-    <EditText
-        android:id="@+id/UsernameEntry"
-        android:hint="Username"
-        android:inputType="text"
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/username_container"
         android:layout_below="@id/RegisterTitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/PasswordEntry"
-        android:hint="Password"
-        android:inputType="textPassword"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/UsernameEntry"
+            android:hint="Username"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/password_container"
+        android:layout_below="@id/username_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/UsernameEntry" />
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/PasswordEntry"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"/>
+
+    </android.support.design.widget.TextInputLayout>
+
     <Button
         android:id="@+id/RegisterButton"
         android:text="Create Account"
@@ -37,7 +56,7 @@
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/PasswordEntry"/>
+        android:layout_below="@id/password_container"/>
 
     <Button
         android:id="@+id/back_to_login_button"

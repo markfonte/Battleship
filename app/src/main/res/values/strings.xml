@@ -16,4 +16,7 @@
     <string name="lobby_button_text">Log Out</string>
 
     <string name="dynamic_text">Dynamic</string>
+    <string name="join_game_as_player">Go to Game</string>
+    <string name="join_open_game">Join Game</string>
+    <string name="closed_game">Closed</string>
 </resources>
