@@ -17,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -99,11 +100,22 @@ public class Login extends AppCompatActivity {
     private void moveToCreateAccount() {
         Log.d("Login.java", "Button clicked, moving to Register Activity");
         Intent i = new Intent(Login.this, Register.class);
-        startActivity(i);
+        startActivityForResult(i, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == 1 && data.hasExtra("mUserName")) {
+            mUserName =  data.getExtras().getString("mUserName");
+            mUserId = data.getExtras().getInt("mUserId");
+            mSessionId = data.getExtras().getString("mSessionId");
+        }
+        finish();
     }
 
     @Override
     public void finish() {
+        Log.d("Login.java", "finishing the login request");
         // Prepare data intent
         Intent data = new Intent();
         data.putExtra("mUserId", mUserId);
@@ -120,6 +132,7 @@ public class Login extends AppCompatActivity {
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
+        Log.d("Login.java", "attempting to login");
         if (mAuthTask != null) {
             return;
         }

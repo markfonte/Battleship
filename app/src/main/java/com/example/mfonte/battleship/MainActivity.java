@@ -43,12 +43,10 @@ public class MainActivity extends AppCompatActivity {
         String userName = "";
         String sessionId = "";
         int userId = 0;
-        if (resultCode == RESULT_OK && requestCode == 0) {
-            if (data.hasExtra("mUserName")) {
-                userName =  data.getExtras().getString("mUserName");
-                userId = data.getExtras().getInt("mUserId");
-                sessionId = data.getExtras().getString("mSessionId");
-            }
+        if (resultCode == RESULT_OK && requestCode == 0 && data.hasExtra("mUserName")) {
+            userName =  data.getExtras().getString("mUserName");
+            userId = data.getExtras().getInt("mUserId");
+            sessionId = data.getExtras().getString("mSessionId");
         }
         TextView username_display_text = findViewById(R.id.username_display_text);
         username_display_text.append(userName);
