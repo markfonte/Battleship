@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Bundle bundle = getIntent().getExtras();
+//        Bundle bundle = getIntent().getExtras();
 //        try {
 //            boolean value = bundle.getBoolean("success");
 //        } catch (java.lang.NullPointerException e) {
@@ -49,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
                 sessionId = data.getExtras().getString("mSessionId");
             }
         }
+        TextView username_display_text = findViewById(R.id.username_display_text);
+        username_display_text.append(userName);
         LinearLayout rl = findViewById(R.id.lobbyLinearLayout);
         for(int x=0; x<20; ++x) {
             TextView dynamic = new TextView(this);

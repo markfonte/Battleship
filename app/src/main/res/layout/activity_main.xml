@@ -41,6 +41,13 @@
 
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/username_display_text"
+            android:textSize="18sp"
+            android:text="Username: "
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <Button
             android:id="@+id/new_game_button"
             android:text="New Game"
