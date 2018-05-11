@@ -39,22 +39,22 @@ public class MainActivity extends AppCompatActivity {
         startApp();
     }
 
+    private String mLoggedInUserName = "";
+    private int mLoggedInUserId = 0;
+    private String mLoggedInSessionId = "";
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        String userName = "";
-        String sessionId = "";
-        int userId = 0;
         if (resultCode == RESULT_OK && requestCode == 0 && data.hasExtra("mUserName")) {
-            userName =  data.getExtras().getString("mUserName");
-            userId = data.getExtras().getInt("mUserId");
-            sessionId = data.getExtras().getString("mSessionId");
+            mLoggedInUserName =  data.getExtras().getString("mUserName");
+            mLoggedInUserId = data.getExtras().getInt("mUserId");
+            mLoggedInSessionId = data.getExtras().getString("mSessionId");
         }
         TextView username_display_text = findViewById(R.id.username_display_text);
-        username_display_text.append(userName);
+        username_display_text.append(mLoggedInUserName);
         sendGetRequestForLobbyData();
     }
 
-    protected void insertLobbyRow(String username1, String username2, String state, String currentUserName) {
+    protected void insertLobbyRow(String username1, String username2, int stateId, String currentUserName) {
         LinearLayout lobbyListContainer = findViewById(R.id.lobbyLinearLayout);
         TextView user1 = new TextView(this);
         TextView user2 = new TextView(this);
@@ -67,6 +67,19 @@ public class MainActivity extends AppCompatActivity {
         user2.setText(username2);
         user2.setPadding(8, 8 , 8, 8);
         user2.setTextSize(18);
+        String state;
+        if(stateId == 0) {
+            state = "join_game";
+        }
+        else if(stateId == 1) {
+            state = "setup";
+        }
+        else if(stateId == 2) {
+            state = "gameplay";
+        }
+        else {
+            state = "game_over";
+        }
         switch(state) {
             case "join_game": {
                 if(isUser1) {
@@ -116,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         lobbyListContainer.addView(lobbyRow);
     }
 
-    private JSONObject mJSONContainer = null;
+    private JSONArray mJSONContainer = null;
 
     protected void sendGetRequestForLobbyData()  {
         // Instantiate the RequestQueue.
@@ -130,8 +143,15 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("MainActivity.java", "Success: " + response.toString());
                         try {
                             if (Integer.parseInt(response.get("length").toString()) > 0) {
-                                //response.toJSONArray("");
-                                Log.d("MainActivity.java", "it exists");
+                                mJSONContainer = response.getJSONArray("games");
+                                for(int x=0; x<Integer.parseInt(response.get("length").toString()); ++x) {
+                                   JSONObject jsonObject = mJSONContainer.getJSONObject(x);
+                                   int mGameId = Integer.parseInt(jsonObject.getString("id"));
+                                   int mMode = Integer.parseInt(jsonObject.getString("mode"));
+                                   String mUser1Name = jsonObject.getString("user1_name");
+                                   String mUser2Name = jsonObject.getString("user2_name");
+                                   insertLobbyRow(mUser1Name, mUser2Name, mMode, mLoggedInUserName);
+                                }
                             }
                         }
                         catch (org.json.JSONException e) {

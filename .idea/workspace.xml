@@ -20,7 +20,6 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/Login.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/Login.java" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/MainActivity.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,25 +43,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="967">
-              <caret line="120" column="50" lean-forward="false" selection-start-line="120" selection-start-column="50" selection-end-line="120" selection-end-column="50" />
+            <state relative-caret-position="355">
+              <caret line="152" column="100" lean-forward="false" selection-start-line="152" selection-start-column="100" selection-end-line="152" selection-end-column="100" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2676#2715#0" expanded="true" />
-                <element signature="e#2797#2831#0" expanded="true" />
-                <element signature="e#2992#3031#0" expanded="true" />
-                <element signature="e#3113#3144#0" expanded="true" />
-                <element signature="e#3308#3347#0" expanded="true" />
-                <element signature="e#3429#3460#0" expanded="true" />
-                <element signature="e#3625#3664#0" expanded="true" />
-                <element signature="e#3746#3777#0" expanded="true" />
-                <element signature="e#4542#5267#0" expanded="true" />
-                <element signature="e#5266#5267#0" expanded="true" />
-                <element signature="e#5269#5482#0" expanded="true" />
-                <element signature="e#5481#5482#0" expanded="true" />
+                <element signature="e#3045#3084#0" expanded="true" />
+                <element signature="e#3166#3200#0" expanded="true" />
+                <element signature="e#3361#3400#0" expanded="true" />
+                <element signature="e#3482#3513#0" expanded="true" />
+                <element signature="e#3677#3716#0" expanded="true" />
+                <element signature="e#3798#3829#0" expanded="true" />
+                <element signature="e#3994#4033#0" expanded="true" />
+                <element signature="e#4115#4146#0" expanded="true" />
+                <element signature="e#4910#6289#0" expanded="true" />
+                <element signature="e#6288#6289#0" expanded="true" />
+                <element signature="e#6291#6504#0" expanded="true" />
+                <element signature="e#6503#6504#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -71,18 +70,18 @@
       <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="7" column="43" lean-forward="false" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
+            <state relative-caret-position="378">
+              <caret line="18" column="49" lean-forward="false" selection-start-line="18" selection-start-column="49" selection-end-line="18" selection-end-column="49" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Login.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Login.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/Login.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="102" column="12" lean-forward="false" selection-start-line="102" selection-start-column="12" selection-end-line="102" selection-end-column="12" />
+            <state relative-caret-position="-2366">
+              <caret line="111" column="0" lean-forward="false" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1824#2201#0" expanded="true" />
@@ -117,6 +116,19 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="990">
               <caret line="78" column="36" lean-forward="false" selection-start-line="78" selection-start-column="36" selection-end-line="78" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-630">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -2250,11 +2262,11 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/LoginResponseData.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/Register.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/Login.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
       </list>
     </option>
   </component>
@@ -2268,8 +2280,9 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="width" value="976" />
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="1189" />
     <option name="height" value="1038" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -2605,7 +2618,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/MainActivity.java</url>
-          <line>42</line>
+          <line>45</line>
           <properties class="com.example.mfonte.battleship.MainActivity" method="onActivityResult">
             <option name="EMULATED" value="true" />
           </properties>
@@ -2614,7 +2627,7 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/Login.java</url>
           <line>110</line>
-          <properties class="com.example.mfonte.battleship.Login">
+          <properties class="com.example.mfonte.battleship.Login" method="finish">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="72" />
@@ -2622,7 +2635,7 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/Login.java</url>
           <line>127</line>
-          <properties class="com.example.mfonte.battleship.Login">
+          <properties class="com.example.mfonte.battleship.Login" method="attemptLogin">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="73" />
@@ -2630,7 +2643,7 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/Login.java</url>
           <line>219</line>
-          <properties class="com.example.mfonte.battleship.Login">
+          <properties class="com.example.mfonte.battleship.Login" method="sendLoginRequest">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="77" />
@@ -2645,7 +2658,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/MainActivity.java</url>
-          <line>120</line>
+          <line>133</line>
           <properties class="com.example.mfonte.battleship.MainActivity" method="sendGetRequestForLobbyData">
             <option name="EMULATED" value="true" />
           </properties>
@@ -2653,7 +2666,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/MainActivity.java</url>
-          <line>128</line>
+          <line>141</line>
           <properties method="onResponse">
             <option name="EMULATED" value="true" />
           </properties>
@@ -2661,14 +2674,14 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/MainActivity.java</url>
-          <line>142</line>
+          <line>162</line>
           <properties method="onErrorResponse">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="86" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="87" />
+      <option name="time" value="88" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="app">
@@ -2692,18 +2705,18 @@
           <caret line="59" column="34" lean-forward="false" selection-start-line="59" selection-start-column="34" selection-end-line="59" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2676#2715#0" expanded="true" />
-            <element signature="e#2797#2831#0" expanded="true" />
-            <element signature="e#2992#3031#0" expanded="true" />
-            <element signature="e#3113#3144#0" expanded="true" />
-            <element signature="e#3308#3347#0" expanded="true" />
-            <element signature="e#3429#3460#0" expanded="true" />
-            <element signature="e#3625#3664#0" expanded="true" />
-            <element signature="e#3746#3777#0" expanded="true" />
-            <element signature="e#4542#5267#0" expanded="true" />
-            <element signature="e#5266#5267#0" expanded="true" />
-            <element signature="e#5269#5482#0" expanded="true" />
-            <element signature="e#5481#5482#0" expanded="true" />
+            <element signature="e#3045#3084#0" expanded="true" />
+            <element signature="e#3166#3200#0" expanded="true" />
+            <element signature="e#3361#3400#0" expanded="true" />
+            <element signature="e#3482#3513#0" expanded="true" />
+            <element signature="e#3677#3716#0" expanded="true" />
+            <element signature="e#3798#3829#0" expanded="true" />
+            <element signature="e#3994#4033#0" expanded="true" />
+            <element signature="e#4115#4146#0" expanded="true" />
+            <element signature="e#4910#6289#0" expanded="true" />
+            <element signature="e#6288#6289#0" expanded="true" />
+            <element signature="e#6291#6504#0" expanded="true" />
+            <element signature="e#6503#6504#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2745,18 +2758,18 @@
           <caret line="38" column="61" lean-forward="false" selection-start-line="38" selection-start-column="61" selection-end-line="39" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2676#2715#0" expanded="true" />
-            <element signature="e#2797#2831#0" expanded="true" />
-            <element signature="e#2992#3031#0" expanded="true" />
-            <element signature="e#3113#3144#0" expanded="true" />
-            <element signature="e#3308#3347#0" expanded="true" />
-            <element signature="e#3429#3460#0" expanded="true" />
-            <element signature="e#3625#3664#0" expanded="true" />
-            <element signature="e#3746#3777#0" expanded="true" />
-            <element signature="e#4542#5267#0" expanded="true" />
-            <element signature="e#5266#5267#0" expanded="true" />
-            <element signature="e#5269#5482#0" expanded="true" />
-            <element signature="e#5481#5482#0" expanded="true" />
+            <element signature="e#3045#3084#0" expanded="true" />
+            <element signature="e#3166#3200#0" expanded="true" />
+            <element signature="e#3361#3400#0" expanded="true" />
+            <element signature="e#3482#3513#0" expanded="true" />
+            <element signature="e#3677#3716#0" expanded="true" />
+            <element signature="e#3798#3829#0" expanded="true" />
+            <element signature="e#3994#4033#0" expanded="true" />
+            <element signature="e#4115#4146#0" expanded="true" />
+            <element signature="e#4910#6289#0" expanded="true" />
+            <element signature="e#6288#6289#0" expanded="true" />
+            <element signature="e#6291#6504#0" expanded="true" />
+            <element signature="e#6503#6504#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2847,18 +2860,18 @@
           <caret line="45" column="33" lean-forward="false" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2676#2715#0" expanded="true" />
-            <element signature="e#2797#2831#0" expanded="true" />
-            <element signature="e#2992#3031#0" expanded="true" />
-            <element signature="e#3113#3144#0" expanded="true" />
-            <element signature="e#3308#3347#0" expanded="true" />
-            <element signature="e#3429#3460#0" expanded="true" />
-            <element signature="e#3625#3664#0" expanded="true" />
-            <element signature="e#3746#3777#0" expanded="true" />
-            <element signature="e#4542#5267#0" expanded="true" />
-            <element signature="e#5266#5267#0" expanded="true" />
-            <element signature="e#5269#5482#0" expanded="true" />
-            <element signature="e#5481#5482#0" expanded="true" />
+            <element signature="e#3045#3084#0" expanded="true" />
+            <element signature="e#3166#3200#0" expanded="true" />
+            <element signature="e#3361#3400#0" expanded="true" />
+            <element signature="e#3482#3513#0" expanded="true" />
+            <element signature="e#3677#3716#0" expanded="true" />
+            <element signature="e#3798#3829#0" expanded="true" />
+            <element signature="e#3994#4033#0" expanded="true" />
+            <element signature="e#4115#4146#0" expanded="true" />
+            <element signature="e#4910#6289#0" expanded="true" />
+            <element signature="e#6288#6289#0" expanded="true" />
+            <element signature="e#6291#6504#0" expanded="true" />
+            <element signature="e#6503#6504#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3044,11 +3057,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.volley/volley/1.1.0/65ed7df4af0e83a626f383ff49c3403342659aa9/volley-1.1.0-sources.jar!/com/android/volley/toolbox/JsonRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/Register.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="672">
+          <caret line="107" column="47" lean-forward="false" selection-start-line="107" selection-start-column="47" selection-end-line="107" selection-end-column="47" />
+          <folding>
+            <element signature="e#954#1675#0" expanded="true" />
+            <element signature="e#1674#1675#0" expanded="true" />
+            <element signature="e#1805#2122#0" expanded="true" />
+            <element signature="e#2121#2122#0" expanded="true" />
+            <element signature="e#2343#2385#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_game_page.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-243">
+          <caret line="22" column="15" lean-forward="false" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
+          <folding>
+            <element signature="e#3017#3047#0" expanded="true" />
+          </folding>
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
@@ -3066,75 +3114,29 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="43" lean-forward="false" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
+        <state relative-caret-position="-630">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-243">
-          <caret line="22" column="15" lean-forward="false" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
-          <folding>
-            <element signature="e#3017#3047#0" expanded="true" />
-          </folding>
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/Register.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="107" column="47" lean-forward="false" selection-start-line="107" selection-start-column="47" selection-end-line="107" selection-end-column="47" />
-          <folding>
-            <element signature="e#954#1675#0" expanded="true" />
-            <element signature="e#1674#1675#0" expanded="true" />
-            <element signature="e#1805#2122#0" expanded="true" />
-            <element signature="e#2121#2122#0" expanded="true" />
-            <element signature="e#2343#2385#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.volley/volley/1.1.0/65ed7df4af0e83a626f383ff49c3403342659aa9/volley-1.1.0-sources.jar!/com/android/volley/toolbox/JsonRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+        <state relative-caret-position="378">
+          <caret line="18" column="49" lean-forward="false" selection-start-line="18" selection-start-column="49" selection-end-line="18" selection-end-column="49" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="967">
-          <caret line="120" column="50" lean-forward="false" selection-start-line="120" selection-start-column="50" selection-end-line="120" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2676#2715#0" expanded="true" />
-            <element signature="e#2797#2831#0" expanded="true" />
-            <element signature="e#2992#3031#0" expanded="true" />
-            <element signature="e#3113#3144#0" expanded="true" />
-            <element signature="e#3308#3347#0" expanded="true" />
-            <element signature="e#3429#3460#0" expanded="true" />
-            <element signature="e#3625#3664#0" expanded="true" />
-            <element signature="e#3746#3777#0" expanded="true" />
-            <element signature="e#4542#5267#0" expanded="true" />
-            <element signature="e#5266#5267#0" expanded="true" />
-            <element signature="e#5269#5482#0" expanded="true" />
-            <element signature="e#5481#5482#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/Login.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="102" column="12" lean-forward="false" selection-start-line="102" selection-start-column="12" selection-end-line="102" selection-end-column="12" />
+        <state relative-caret-position="-2366">
+          <caret line="111" column="0" lean-forward="false" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1824#2201#0" expanded="true" />
@@ -3144,6 +3146,28 @@
             <element signature="e#2619#2772#0" expanded="true" />
             <element signature="e#2771#2772#0" expanded="true" />
             <element signature="e#5657#5699#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mfonte/battleship/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="152" column="100" lean-forward="false" selection-start-line="152" selection-start-column="100" selection-end-line="152" selection-end-column="100" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3045#3084#0" expanded="true" />
+            <element signature="e#3166#3200#0" expanded="true" />
+            <element signature="e#3361#3400#0" expanded="true" />
+            <element signature="e#3482#3513#0" expanded="true" />
+            <element signature="e#3677#3716#0" expanded="true" />
+            <element signature="e#3798#3829#0" expanded="true" />
+            <element signature="e#3994#4033#0" expanded="true" />
+            <element signature="e#4115#4146#0" expanded="true" />
+            <element signature="e#4910#6289#0" expanded="true" />
+            <element signature="e#6288#6289#0" expanded="true" />
+            <element signature="e#6291#6504#0" expanded="true" />
+            <element signature="e#6503#6504#0" expanded="true" />
           </folding>
         </state>
       </provider>
