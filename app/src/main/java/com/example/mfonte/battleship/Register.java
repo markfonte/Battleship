@@ -87,7 +87,8 @@ public class Register extends AppCompatActivity {
 
     protected void sendCreateAccountRequest(final String user, final String pass, final String confirm_pass) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://10.0.2.2/api/create_account.php";
+        // String url = "http://10.0.2.2/api/create_account.php";
+        String url = "http://dmilazterns01.learninga-z.com:8080/api/create_account.php";
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -95,10 +96,7 @@ public class Register extends AppCompatActivity {
                         try {
                             JSONObject json = new JSONObject(response);
                             if (json.get("success").toString().equals("false")) {
-                                Log.d("Register.java", "Unsuccessful, reload page");
                                 Log.d("Register.java", response);
-                                //Intent i = new Intent(Register.this, Register.class);
-                                //startActivity(i);
                                 EditText mPasswordView = findViewById(R.id.ConfirmPasswordEntry);
                                 EditText mUsernameView = findViewById(R.id.UsernameEntry);
                                 JSONArray jsonArray = json.getJSONArray("errors");
@@ -126,7 +124,6 @@ public class Register extends AppCompatActivity {
                         } catch (JSONException e) {
                             Log.d("Register.java", "JSONException: " + e.toString());
                         }
-                        Log.d("Response", response);
                     }
                 },
                 new Response.ErrorListener() {
@@ -149,7 +146,6 @@ public class Register extends AppCompatActivity {
         };
         queue.add(postRequest);
     }
-
 
     @Override
     public void onBackPressed() {

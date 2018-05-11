@@ -223,7 +223,8 @@ public class Login extends AppCompatActivity {
 
     protected void sendLoginRequest(final String user, final String pass) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://10.0.2.2/api/login.php";
+        //String url = "http://10.0.2.2/api/login.php";
+        String url = "http://dmilazterns01.learninga-z.com:8080/api/login.php";
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override

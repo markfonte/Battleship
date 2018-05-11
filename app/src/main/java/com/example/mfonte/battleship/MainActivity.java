@@ -1,6 +1,9 @@
 package com.example.mfonte.battleship;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -59,6 +62,17 @@ public class MainActivity extends AppCompatActivity {
         TextView user1 = new TextView(this);
         TextView user2 = new TextView(this);
         Button enterGame = new Button(this);
+        enterGame.setWidth(400);
+        user1.setTextColor(Color.rgb(0,0,140));
+        user1.setWidth(440);
+        user2.setWidth(440);
+        if(username2.equals("")) {
+            username2 = "OPEN";
+            user2.setTextColor(Color.rgb(0,160,0));
+        }
+        else {
+            user2.setTextColor(Color.rgb(139,0,139));
+        }
         boolean isUser1 = currentUserName.equals(username1);
         boolean isUser2 = currentUserName.equals(username2);
         user1.setText(username1);
@@ -88,38 +102,52 @@ public class MainActivity extends AppCompatActivity {
             case "join_game": {
                 if (isUser1) {
                     enterGame.setText(getString(R.string.join_game_as_player));
+                    enterGame.setTextColor(Color.rgb(0,128,0));
                 } else {
                     enterGame.setText(getString(R.string.join_open_game));
+                    enterGame.setTextColor(Color.rgb(0,128,0));
                 }
             }
             break;
             case "setup": {
                 if (isUser1 || isUser2) {
                     enterGame.setText(getString(R.string.join_game_as_player));
+                    enterGame.setTextColor(Color.rgb(0,128,0));
                 } else {
                     enterGame.setText(getString(R.string.closed_game));
+                    enterGame.setTextColor(Color.rgb(255,0,0));
                 }
             }
             break;
             case "game_play": {
                 if (isUser1 || isUser2) {
                     enterGame.setText(getString(R.string.join_game_as_player));
+                    enterGame.setTextColor(Color.rgb(0,128,0));
                 } else {
                     enterGame.setText(getString(R.string.closed_game));
+                    enterGame.setTextColor(Color.rgb(255,0,0));
                 }
             }
             break;
             case "game_over": {
                 if (isUser1 || isUser2) {
                     enterGame.setText(getString(R.string.join_game_as_player));
+                    enterGame.setTextColor(Color.rgb(0,128,0));
                 } else {
                     enterGame.setText(getString(R.string.closed_game));
+                    enterGame.setTextColor(Color.rgb(255,0,0));
                 }
             }
             break;
             default: {
                 Log.d("MainActivity.java", "default in switch case for game modes");
             }
+        }
+        if(isUser1) {
+            user1.setTextColor(Color.rgb(0, 128,0));
+        }
+        if(isUser2) {
+            user2.setTextColor(Color.rgb(0, 128,0));
         }
         LinearLayout lobbyRow = new LinearLayout(this);
         lobbyRow.addView(user1);
@@ -131,8 +159,8 @@ public class MainActivity extends AppCompatActivity {
     protected void sendGetRequestForLobbyData() {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://10.0.2.2/api/game/lobby.php";
-
+       // String url = "http://10.0.2.2/api/game/lobby.php";
+        String url = "http://dmilazterns01.learninga-z.com:8080/api/game/lobby.php";
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -140,6 +168,26 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("MainActivity.java", "Success: " + response.toString());
                         try {
                             if (Integer.parseInt(response.get("length").toString()) > 0) {
+                                LinearLayout lobbyListContainer = findViewById(R.id.lobbyLinearLayout);
+                                TextView user1 = new TextView(MainActivity.this);
+                                TextView user2 = new TextView(MainActivity.this);
+                                TextView user3 = new TextView(MainActivity.this);
+                                user1.setText(getString(R.string.player_one));
+                                user1.setPadding(8, 8, 8, 8);
+                                user1.setTextSize(20);
+                                user1.setWidth(440);
+                                user1.setTypeface(null, Typeface.BOLD);
+                                user2.setText(getString(R.string.player_two));
+                                user2.setPadding(8, 8, 8, 8);
+                                user2.setTextSize(20);
+                                user2.setWidth(440);
+                                user2.setTypeface(null, Typeface.BOLD);
+                                user3.setWidth(400);
+                                LinearLayout lobbyRow = new LinearLayout(MainActivity.this);
+                                lobbyRow.addView(user1);
+                                lobbyRow.addView(user2);
+                                lobbyRow.addView(user3);
+                                lobbyListContainer.addView(lobbyRow);
                                 mJSONContainer = response.getJSONArray("games");
                                 for (int x = 0; x < Integer.parseInt(response.get("length").toString()); ++x) {
                                     JSONObject jsonObject = mJSONContainer.getJSONObject(x);
