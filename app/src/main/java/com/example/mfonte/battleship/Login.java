@@ -18,7 +18,6 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -33,25 +32,29 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
 /**
  * A login screen that offers login via username/password.
  */
 public class Login extends AppCompatActivity {
 
-    @Override
-    public void onBackPressed() {
-    }
-
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
-
     // UI references.
     private EditText mUsernameView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private int mUserId = 0;
+    private String mUserName = "";
+    private String mSessionId = "";
+    private boolean mSuccess = false;
+
+    @Override
+    public void onBackPressed() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,11 +104,12 @@ public class Login extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK && requestCode == 1 && data.hasExtra("mUserName")) {
-            mUserName =  data.getExtras().getString("mUserName");
+        if (resultCode == RESULT_OK && requestCode == 1 && data.hasExtra("mUserName") && data.getExtras() != null) {
+            mUserName = data.getExtras().getString("mUserName");
             mUserId = data.getExtras().getInt("mUserId");
+
             mSessionId = data.getExtras().getString("mSessionId");
-            if(data.getExtras().getBoolean("logged_in")) {
+            if (data.getExtras().getBoolean("logged_in")) {
                 finish();
             }
         }
@@ -148,13 +152,13 @@ public class Login extends AppCompatActivity {
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (TextUtils.isEmpty(password)){
-            Log.d("emptyPassword", username );
+        if (TextUtils.isEmpty(password)) {
+            Log.d("emptyPassword", username);
             mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
             cancel = true;
-        } else if(!isPasswordValid(password)) {
-            Log.d("invalidPassword", username );
+        } else if (!isPasswordValid(password)) {
+            Log.d("invalidPassword", username);
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -162,12 +166,12 @@ public class Login extends AppCompatActivity {
 
         // Check for a valid username address.
         if (TextUtils.isEmpty(username)) {
-            Log.d("emptyUsername", username );
+            Log.d("emptyUsername", username);
             mUsernameView.setError(getString(R.string.error_field_required));
             focusView = mUsernameView;
             cancel = true;
         } else if (!isUsernameValid(username)) {
-            Log.d("invalidUsername", username );
+            Log.d("invalidUsername", username);
             mUsernameView.setError(getString(R.string.error_invalid_username));
             focusView = mUsernameView;
             cancel = true;
@@ -217,54 +221,47 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    private int mUserId = 0;
-    private String mUserName = "";
-    private String mSessionId = "";
-    private boolean mSuccess = false;
-
-    protected void sendLoginRequest(final String user, final String pass)  {
+    protected void sendLoginRequest(final String user, final String pass) {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://10.0.2.2/api/login.php";
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-            new Response.Listener<String>()
-            {
-                @Override
-                public void onResponse(String response) {
-                    //showProgress(false);
-                    try {
-                        JSONObject json = new JSONObject(response);
-                        if (json.get("success").toString().equals("false")) {
-                            Log.d("Login.java", "Unsuccessful, transferring to register page");
-                            Log.d("Login.java", response);
-                            mPasswordView.setError(getString(R.string.error_incorrect_combo));
-                            View focusView = mPasswordView;
-                            focusView.requestFocus();
-                        } else {
-                            Log.d("Login.java", "Username and password are valid, transferring to lobby");
-                            mUserId = Integer.parseInt(json.get("id").toString());
-                            mUserName = json.get("name").toString();
-                            mSessionId = json.get("session_id").toString();
-                            mSuccess = true;
-                            finish();
-                        }
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //showProgress(false);
+                        try {
+                            JSONObject json = new JSONObject(response);
+                            if (json.get("success").toString().equals("false")) {
+                                Log.d("Login.java", "Unsuccessful, transferring to register page");
+                                Log.d("Login.java", response);
+                                mPasswordView.setError(getString(R.string.error_incorrect_combo));
+                                View focusView = mPasswordView;
+                                focusView.requestFocus();
+                            } else {
+                                Log.d("Login.java", "Username and password are valid, transferring to lobby");
+                                mUserId = Integer.parseInt(json.get("id").toString());
+                                mUserName = json.get("name").toString();
+                                mSessionId = json.get("session_id").toString();
+                                mSuccess = true;
+                                finish();
+                            }
 
-                    } catch (JSONException e) {
-                        Log.d("Login.java", "JSONException");
+                        } catch (JSONException e) {
+                            Log.d("Login.java", "JSONException");
+                        }
+                        Log.d("Response", response);
                     }
-                    Log.d("Response", response);
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.getNetworkTimeMs();
+                        Log.d("Login.java", "Volley Error");
+                    }
                 }
-            },
-            new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    error.getNetworkTimeMs();
-                    Log.d("Login.java", "Volley Error");
-                }
-            }
         ) {
             @Override
-            protected Map<String, String> getParams()
-            {
+            protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("mobile", "true");
                 params.put("username", user);

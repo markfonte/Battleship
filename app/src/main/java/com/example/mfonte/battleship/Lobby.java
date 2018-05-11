@@ -12,6 +12,7 @@ public class Lobby extends AppCompatActivity {
         setContentView(R.layout.activity_lobby);
         startLogin();
     }
+
     protected void startLogin() {
         Intent i = new Intent(this, Login.class);
         startActivity(i);

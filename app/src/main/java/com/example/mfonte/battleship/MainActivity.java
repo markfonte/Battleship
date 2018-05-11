@@ -13,15 +13,18 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
+
+    private String mLoggedInUserName = "";
+    private int mLoggedInUserId = 0;
+    private String mLoggedInSessionId = "";
+    private JSONArray mJSONContainer = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +42,10 @@ public class MainActivity extends AppCompatActivity {
         startApp();
     }
 
-    private String mLoggedInUserName = "";
-    private int mLoggedInUserId = 0;
-    private String mLoggedInSessionId = "";
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK && requestCode == 0 && data.hasExtra("mUserName")) {
-            mLoggedInUserName =  data.getExtras().getString("mUserName");
+        if (resultCode == RESULT_OK && requestCode == 0 && data.hasExtra("mUserName") && data.getExtras() != null) {
+            mLoggedInUserName = data.getExtras().getString("mUserName");
             mLoggedInUserId = data.getExtras().getInt("mUserId");
             mLoggedInSessionId = data.getExtras().getString("mSessionId");
         }
@@ -62,57 +62,57 @@ public class MainActivity extends AppCompatActivity {
         boolean isUser1 = currentUserName.equals(username1);
         boolean isUser2 = currentUserName.equals(username2);
         user1.setText(username1);
-        user1.setPadding(8, 8 , 8, 8);
+        user1.setPadding(8, 8, 8, 8);
         user1.setTextSize(18);
         user2.setText(username2);
-        user2.setPadding(8, 8 , 8, 8);
+        user2.setPadding(8, 8, 8, 8);
         user2.setTextSize(18);
         String state;
-        if(stateId == 0) {
-            state = "join_game";
+        switch (stateId) {
+            case 0:
+                state = "join_game";
+                break;
+            case 1:
+                state = "setup";
+                break;
+            case 2:
+                state = "game_play";
+                break;
+            case 3:
+                state = "game_over";
+                break;
+            default:
+                state = "game_over";
         }
-        else if(stateId == 1) {
-            state = "setup";
-        }
-        else if(stateId == 2) {
-            state = "gameplay";
-        }
-        else {
-            state = "game_over";
-        }
-        switch(state) {
+        switch (state) {
             case "join_game": {
-                if(isUser1) {
+                if (isUser1) {
                     enterGame.setText(getString(R.string.join_game_as_player));
-                }
-                else {
+                } else {
                     enterGame.setText(getString(R.string.join_open_game));
                 }
             }
             break;
             case "setup": {
-                if(isUser1 || isUser2) {
+                if (isUser1 || isUser2) {
                     enterGame.setText(getString(R.string.join_game_as_player));
-                }
-                else {
+                } else {
                     enterGame.setText(getString(R.string.closed_game));
                 }
             }
             break;
-            case "gameplay": {
-                if(isUser1 || isUser2) {
+            case "game_play": {
+                if (isUser1 || isUser2) {
                     enterGame.setText(getString(R.string.join_game_as_player));
-                }
-                else {
+                } else {
                     enterGame.setText(getString(R.string.closed_game));
                 }
             }
             break;
             case "game_over": {
-                if(isUser1 || isUser2) {
+                if (isUser1 || isUser2) {
                     enterGame.setText(getString(R.string.join_game_as_player));
-                }
-                else {
+                } else {
                     enterGame.setText(getString(R.string.closed_game));
                 }
             }
@@ -128,9 +128,7 @@ public class MainActivity extends AppCompatActivity {
         lobbyListContainer.addView(lobbyRow);
     }
 
-    private JSONArray mJSONContainer = null;
-
-    protected void sendGetRequestForLobbyData()  {
+    protected void sendGetRequestForLobbyData() {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://10.0.2.2/api/game/lobby.php";
@@ -143,17 +141,16 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             if (Integer.parseInt(response.get("length").toString()) > 0) {
                                 mJSONContainer = response.getJSONArray("games");
-                                for(int x=0; x<Integer.parseInt(response.get("length").toString()); ++x) {
-                                   JSONObject jsonObject = mJSONContainer.getJSONObject(x);
-                                   int mGameId = Integer.parseInt(jsonObject.getString("id"));
-                                   int mMode = Integer.parseInt(jsonObject.getString("mode"));
-                                   String mUser1Name = jsonObject.getString("user1_name");
-                                   String mUser2Name = jsonObject.getString("user2_name");
-                                   insertLobbyRow(mUser1Name, mUser2Name, mMode, mLoggedInUserName);
+                                for (int x = 0; x < Integer.parseInt(response.get("length").toString()); ++x) {
+                                    JSONObject jsonObject = mJSONContainer.getJSONObject(x);
+                                    int mGameId = Integer.parseInt(jsonObject.getString("id"));
+                                    int mMode = Integer.parseInt(jsonObject.getString("mode"));
+                                    String mUser1Name = jsonObject.getString("user1_name");
+                                    String mUser2Name = jsonObject.getString("user2_name");
+                                    insertLobbyRow(mUser1Name, mUser2Name, mMode, mLoggedInUserName);
                                 }
                             }
-                        }
-                        catch (org.json.JSONException e) {
+                        } catch (org.json.JSONException e) {
                             Log.d("MainActivity.java", e.toString());
                         }
                     }

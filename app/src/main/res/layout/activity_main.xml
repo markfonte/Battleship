@@ -7,56 +7,56 @@
 
     <LinearLayout
         android:id="@+id/lobbyLinearLayout"
-        android:padding="8dp"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="8dp" >
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/number1"
-                android:text="Lobby"
-                android:textStyle="bold"
-                android:textSize="28sp"
-                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Lobby"
+                android:textSize="28sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/lobbyButton"
                 style="?android:textAppearanceSmall"
-                android:layout_toEndOf="@id/number1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:textStyle="bold"
-                android:layout_marginStart="128dp"
                 android:layout_alignParentEnd="true"
-                android:text="@string/lobby_button_text"/>
+                android:layout_centerVertical="true"
+                android:layout_marginStart="128dp"
+                android:layout_toEndOf="@id/number1"
+                android:text="@string/lobby_button_text"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
         <TextView
             android:id="@+id/username_display_text"
-            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="Username: "
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/new_game_button"
-            android:text="New Game"
-            android:layout_margin="8dp"
             style="?android:textAppearanceSmall"
-            android:textStyle="bold"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="New Game"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
