@@ -11,10 +11,11 @@
     <string name="error_invalid_password">This password is invalid</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-
+    <string name="error_incorrect_combo">Username or password is incorrect</string>
     <string name="main_activity_text">Lobby</string>
     <string name="lobby_button_text">Log Out</string>
-
+    <string name="passwords_do_not_match">Username and Password don\'t match</string>
+    <string name="username_already_exists">Username already exists</string>
     <string name="dynamic_text">Dynamic</string>
     <string name="join_game_as_player">Go to Game</string>
     <string name="join_open_game">Join Game</string>

@@ -121,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("MainActivity.java", "default in switch case for game modes");
             }
         }
-
         LinearLayout lobbyRow = new LinearLayout(this);
         lobbyRow.addView(user1);
         lobbyRow.addView(user2);

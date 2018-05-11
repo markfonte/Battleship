@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,8 +56,9 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_login);
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         // Set up the login form.
         mUsernameView = findViewById(R.id.username);
 
@@ -103,8 +105,11 @@ public class Login extends AppCompatActivity {
             mUserName =  data.getExtras().getString("mUserName");
             mUserId = data.getExtras().getInt("mUserId");
             mSessionId = data.getExtras().getString("mSessionId");
+            if(data.getExtras().getBoolean("logged_in")) {
+                finish();
+            }
         }
-        finish();
+
     }
 
     @Override
@@ -225,13 +230,15 @@ public class Login extends AppCompatActivity {
             {
                 @Override
                 public void onResponse(String response) {
+                    //showProgress(false);
                     try {
                         JSONObject json = new JSONObject(response);
                         if (json.get("success").toString().equals("false")) {
                             Log.d("Login.java", "Unsuccessful, transferring to register page");
                             Log.d("Login.java", response);
-                            Intent i = new Intent(Login.this, Register.class);
-                            startActivity(i);
+                            mPasswordView.setError(getString(R.string.error_incorrect_combo));
+                            View focusView = mPasswordView;
+                            focusView.requestFocus();
                         } else {
                             Log.d("Login.java", "Username and password are valid, transferring to lobby");
                             mUserId = Integer.parseInt(json.get("id").toString());

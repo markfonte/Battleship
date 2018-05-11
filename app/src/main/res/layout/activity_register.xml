@@ -3,84 +3,98 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".Register">
-
-    <TextView
-        android:id="@+id/RegisterTitle"
-        android:textSize="24sp"
-        android:padding="8dp"
-        android:textStyle="bold"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Create An Account"
-        android:textAlignment="center" />
-
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/username_container"
-        android:layout_below="@id/RegisterTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/UsernameEntry"
-            android:hint="Username"
-            android:inputType="text"
+        android:layout_height="match_parent">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"/>
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/RegisterTitle"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Create An Account"
+                android:textAlignment="center" />
 
-    </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/password_container"
-        android:layout_below="@id/username_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/username_container"
+                android:layout_below="@id/RegisterTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/PasswordEntry"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"/>
+                <EditText
+                    android:id="@+id/UsernameEntry"
+                    android:hint="Username"
+                    android:inputType="text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"/>
 
-    </android.support.design.widget.TextInputLayout>
+            </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/confirm_password_container"
-        android:layout_below="@id/password_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/password_container"
+                android:layout_below="@id/username_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/ConfirmPasswordEntry"
-            android:hint="Confirm Password"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"/>
+                <EditText
+                    android:id="@+id/PasswordEntry"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"/>
 
-    </android.support.design.widget.TextInputLayout>
+            </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:id="@+id/RegisterButton"
-        android:text="Create Account"
-        style="?android:textAppearanceSmall"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/confirm_password_container"/>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/confirm_password_container"
+                android:layout_below="@id/password_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/back_to_login_button"
-        android:text="Back To Login"
-        style="?android:textAppearanceSmall"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/RegisterButton"/>
+                <EditText
+                    android:id="@+id/ConfirmPasswordEntry"
+                    android:hint="Confirm Password"
+                    android:inputType="textPassword"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/RegisterButton"
+                android:text="Create Account"
+                style="?android:textAppearanceSmall"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_centerInParent="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/confirm_password_container"/>
+
+            <Button
+                android:id="@+id/back_to_login_button"
+                android:text="Back To Login"
+                style="?android:textAppearanceSmall"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_centerInParent="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/RegisterButton"/>
+
+        </RelativeLayout>
+    </ScrollView>
+
 </RelativeLayout>

@@ -15,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,7 +37,10 @@ public class Register extends AppCompatActivity {
                 String password = passwordText.getText().toString();
                 EditText confirmPasswordText = findViewById(R.id.ConfirmPasswordEntry);
                 String confirmPassword = confirmPasswordText.getText().toString();
+                Log.d("Register.java", "here");
                 if(isUsernameValid(username) && isPasswordValid(password)) {
+
+                    Log.d("Register.java", " and here");
                     sendCreateAccountRequest(username, password, confirmPassword);
                 }
             }
@@ -44,9 +48,7 @@ public class Register extends AppCompatActivity {
         final Button backToLoginButton = findViewById(R.id.back_to_login_button);
         backToLoginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent openMainActivity= new Intent(Register.this, Login.class);
-                openMainActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityIfNeeded(openMainActivity, 0);
+                finish();
             }
         });
     }
@@ -68,7 +70,7 @@ public class Register extends AppCompatActivity {
     private String mUserName = "default";
     private String mSessionId = "default";
     private boolean mSuccess = false;
-
+    private boolean mIsLoggedIn = false;
     @Override
     public void finish() {
         // Prepare data intent
@@ -76,6 +78,7 @@ public class Register extends AppCompatActivity {
         data.putExtra("mUserId", mUserId);
         data.putExtra("mUserName", mUserName);
         data.putExtra("mSessionId", mSessionId);
+        data.putExtra("logged_in", mIsLoggedIn);
         // Activity finished ok, return the data
         setResult(RESULT_OK, data);
         super.finish();
@@ -94,19 +97,36 @@ public class Register extends AppCompatActivity {
                         if (json.get("success").toString().equals("false")) {
                             Log.d("Register.java", "Unsuccessful, reload page");
                             Log.d("Register.java", response);
-                            Intent i = new Intent(Register.this, Register.class);
-                            startActivity(i);
+                            //Intent i = new Intent(Register.this, Register.class);
+                            //startActivity(i);
+                            EditText mPasswordView = findViewById(R.id.ConfirmPasswordEntry);
+                            EditText mUsernameView = findViewById(R.id.UsernameEntry);
+                            JSONArray jsonArray = json.getJSONArray("errors");
+                            String jsonArrayString = jsonArray.getString(0); //only display first error
+                            if(jsonArrayString.equals("Password does not match confirm password")) {
+                                mPasswordView.setError(getString(R.string.passwords_do_not_match));
+                                mPasswordView.requestFocus();
+                            }
+                            else if (jsonArrayString.equals("The username '" + user +"' already exists")) {
+                                mUsernameView.setError(getString(R.string.username_already_exists));
+                                mUsernameView.requestFocus();
+                            }
+                            else {
+                                mPasswordView.setError(jsonArrayString);
+                                mPasswordView.requestFocus();
+                            }
                         } else {
                             Log.d("Register.java", "Username and password are valid, transferring to lobby");
                             mUserId = Integer.parseInt(json.get("id").toString());
                             mUserName = json.get("name").toString();
                             mSessionId = json.get("session_id").toString();
                             mSuccess = true;
+                            mIsLoggedIn = true;
                             finish();
                         }
 
                     } catch (JSONException e) {
-                        Log.d("Register.java", "JSONException");
+                        Log.d("Register.java", "JSONException: " + e.toString());
                     }
                     Log.d("Response", response);
                 }
