@@ -55,12 +55,7 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle bundle = getIntent().getExtras();
-        try {
-            boolean value = bundle.getBoolean("success");
-        } catch (java.lang.NullPointerException e) {
-            Log.d("MainActivity.java", e.toString());
-        }
+
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mUsernameView = findViewById(R.id.username);

@@ -123,16 +123,25 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://10.0.2.2/api/game/lobby.php";
 
-        JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>() {
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONArray response) {
-                        Log.d("errorInfo", response.toString());
+                    public void onResponse(JSONObject response) {
+                        Log.d("MainActivity.java", "Success: " + response.toString());
+                        try {
+                            if (Integer.parseInt(response.get("length").toString()) > 0) {
+                                //response.toJSONArray("");
+                                Log.d("MainActivity.java", "it exists");
+                            }
+                        }
+                        catch (org.json.JSONException e) {
+                            Log.d("MainActivity.java", e.toString());
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("errorInfo", error.getMessage());
+                Log.d("MainActivity.java", "Error: " + error.getMessage());
             }
         });
 
