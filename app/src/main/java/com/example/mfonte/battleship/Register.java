@@ -90,49 +90,49 @@ public class Register extends AppCompatActivity {
         // String url = "http://10.0.2.2/api/create_account.php";
         String url = "http://dmilazterns01.learninga-z.com:8080/api/create_account.php";
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject json = new JSONObject(response);
-                            if (json.get("success").toString().equals("false")) {
-                                Log.d("Register.java", response);
-                                EditText mPasswordView = findViewById(R.id.ConfirmPasswordEntry);
-                                EditText mUsernameView = findViewById(R.id.UsernameEntry);
-                                JSONArray jsonArray = json.getJSONArray("errors");
-                                String jsonArrayString = jsonArray.getString(0); //only display first error
-                                if (jsonArrayString.equals("Password does not match confirm password")) {
-                                    mPasswordView.setError(getString(R.string.passwords_do_not_match));
-                                    mPasswordView.requestFocus();
-                                } else if (jsonArrayString.equals("The username '" + user + "' already exists")) {
-                                    mUsernameView.setError(getString(R.string.username_already_exists));
-                                    mUsernameView.requestFocus();
-                                } else {
-                                    mPasswordView.setError(jsonArrayString);
-                                    mPasswordView.requestFocus();
-                                }
+            new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject json = new JSONObject(response);
+                        if (json.get("success").toString().equals("false")) {
+                            Log.d("Register.java", response);
+                            EditText mPasswordView = findViewById(R.id.ConfirmPasswordEntry);
+                            EditText mUsernameView = findViewById(R.id.UsernameEntry);
+                            JSONArray jsonArray = json.getJSONArray("errors");
+                            String jsonArrayString = jsonArray.getString(0); //only display first error
+                            if (jsonArrayString.equals("Password does not match confirm password")) {
+                                mPasswordView.setError(getString(R.string.passwords_do_not_match));
+                                mPasswordView.requestFocus();
+                            } else if (jsonArrayString.equals("The username '" + user + "' already exists")) {
+                                mUsernameView.setError(getString(R.string.username_already_exists));
+                                mUsernameView.requestFocus();
                             } else {
-                                Log.d("Register.java", "Username and password are valid, transferring to lobby");
-                                mUserId = Integer.parseInt(json.get("id").toString());
-                                mUserName = json.get("name").toString();
-                                mSessionId = json.get("session_id").toString();
-                                mSuccess = true;
-                                mIsLoggedIn = true;
-                                finish();
+                                mPasswordView.setError(jsonArrayString);
+                                mPasswordView.requestFocus();
                             }
-
-                        } catch (JSONException e) {
-                            Log.d("Register.java", "JSONException: " + e.toString());
+                        } else {
+                            Log.d("Register.java", "Username and password are valid, transferring to lobby");
+                            mUserId = Integer.parseInt(json.get("id").toString());
+                            mUserName = json.get("name").toString();
+                            mSessionId = json.get("session_id").toString();
+                            mSuccess = true;
+                            mIsLoggedIn = true;
+                            finish();
                         }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.getNetworkTimeMs();
-                        Log.d("Register.java", "Volley Error");
+
+                    } catch (JSONException e) {
+                        Log.d("Register.java", "JSONException: " + e.toString());
                     }
                 }
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    error.getNetworkTimeMs();
+                    Log.d("Register.java", "Volley Error");
+                }
+            }
         ) {
             @Override
             protected Map<String, String> getParams() {

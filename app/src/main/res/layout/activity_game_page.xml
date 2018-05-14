@@ -5,16 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".GamePage">
 
-    <ScrollView
-        android:id="@+id/gamePageScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/gamePageTitle"
+            style="?android:textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Battleship" />
-    </ScrollView>
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="10" />
 
 </RelativeLayout>

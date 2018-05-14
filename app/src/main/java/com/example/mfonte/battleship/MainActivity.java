@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,10 +18,15 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,16 +40,61 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Button button = findViewById(R.id.lobbyButton);
-        button.setOnClickListener(new View.OnClickListener() {
+        final Button logOutButton = findViewById(R.id.log_out_button);
+        logOutButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, MainActivity.class);
                 startActivity(i);
             }
         });
+        final Button newGameButton = findViewById(R.id.new_game_button);
+        newGameButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                sendPostRequestNewGame(Integer.toString(mLoggedInUserId));
+            }
+        });
 
         startApp();
     }
+
+    protected void sendPostRequestNewGame(final String userId){
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "http://dmilazterns01.learninga-z.com:8080/api/game/new_game.php";
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject json = new JSONObject(response);
+                            Log.d("MainActivity.java", response);
+                            int gameId = Integer.parseInt(json.get("id").toString());
+                            Intent i = new Intent(MainActivity.this, GamePage.class);
+                            i.putExtra("gameId", gameId);
+                            startActivity(i);
+                        } catch (JSONException e) {
+                            Log.d("MainActivity.java", "JSONException: " + e.toString());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.getNetworkTimeMs();
+                        Log.d("MainActivity.java", "Volley Error: " + error.toString());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("mobile", "true");
+                params.put("userId", userId);
+                return params;
+            }
+        };
+        queue.add(postRequest);
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
