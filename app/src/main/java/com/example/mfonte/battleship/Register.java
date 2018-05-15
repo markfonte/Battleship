@@ -101,6 +101,7 @@ public class Register extends AppCompatActivity {
                             EditText mUsernameView = findViewById(R.id.UsernameEntry);
                             JSONArray jsonArray = json.getJSONArray("errors");
                             String jsonArrayString = jsonArray.getString(0); //only display first error
+
                             if (jsonArrayString.equals("Password does not match confirm password")) {
                                 mPasswordView.setError(getString(R.string.passwords_do_not_match));
                                 mPasswordView.requestFocus();

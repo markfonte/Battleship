@@ -207,10 +207,10 @@ public class MainActivity extends AppCompatActivity {
         lobbyListContainer.addView(lobbyRow);
     }
 
+
     protected void sendGetRequestForLobbyData() {
-        // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-       // String url = "http://10.0.2.2/api/game/lobby.php";
+        // String url = "http://10.0.2.2/api/game/lobby.php";
         String url = "http://dmilazterns01.learninga-z.com:8080/api/game/lobby.php";
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -219,26 +219,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("MainActivity.java", "Success: " + response.toString());
                         try {
                             if (Integer.parseInt(response.get("length").toString()) > 0) {
-                                LinearLayout lobbyListContainer = findViewById(R.id.lobbyLinearLayout);
-                                TextView user1 = new TextView(MainActivity.this);
-                                TextView user2 = new TextView(MainActivity.this);
-                                TextView user3 = new TextView(MainActivity.this);
-                                user1.setText(getString(R.string.player_one));
-                                user1.setPadding(8, 8, 8, 8);
-                                user1.setTextSize(20);
-                                user1.setWidth(440);
-                                user1.setTypeface(null, Typeface.BOLD);
-                                user2.setText(getString(R.string.player_two));
-                                user2.setPadding(8, 8, 8, 8);
-                                user2.setTextSize(20);
-                                user2.setWidth(440);
-                                user2.setTypeface(null, Typeface.BOLD);
-                                user3.setWidth(400);
-                                LinearLayout lobbyRow = new LinearLayout(MainActivity.this);
-                                lobbyRow.addView(user1);
-                                lobbyRow.addView(user2);
-                                lobbyRow.addView(user3);
-                                lobbyListContainer.addView(lobbyRow);
+                                populateLobbyPageTitles();
                                 mJSONContainer = response.getJSONArray("games");
                                 for (int x = 0; x < Integer.parseInt(response.get("length").toString()); ++x) {
                                     JSONObject jsonObject = mJSONContainer.getJSONObject(x);
@@ -259,9 +240,31 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("MainActivity.java", "Error: " + error.getMessage());
             }
         });
-
-        // Add the request to the RequestQueue.
         queue.add(getRequest);
+    }
+
+
+    protected void populateLobbyPageTitles() {
+        LinearLayout lobbyListContainer = findViewById(R.id.lobbyLinearLayout);
+        TextView user1 = new TextView(MainActivity.this);
+        TextView user2 = new TextView(MainActivity.this);
+        TextView user3 = new TextView(MainActivity.this);
+        user1.setText(getString(R.string.player_one));
+        user1.setPadding(8, 8, 8, 8);
+        user1.setTextSize(20);
+        user1.setWidth(440);
+        user1.setTypeface(null, Typeface.BOLD);
+        user2.setText(getString(R.string.player_two));
+        user2.setPadding(8, 8, 8, 8);
+        user2.setTextSize(20);
+        user2.setWidth(440);
+        user2.setTypeface(null, Typeface.BOLD);
+        user3.setWidth(400);
+        LinearLayout lobbyRow = new LinearLayout(MainActivity.this);
+        lobbyRow.addView(user1);
+        lobbyRow.addView(user2);
+        lobbyRow.addView(user3);
+        lobbyListContainer.addView(lobbyRow);
     }
 
     @Override
